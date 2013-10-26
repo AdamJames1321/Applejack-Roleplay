@@ -6,8 +6,7 @@
 PLUGIN.Name = "Spawnpoints"
 PLUGIN.Spawnpoints = {};
 --[[
-	TODO: Make it not spawn people if there's someone
-	 in the way.
+	If this is not working, please make a issue, this is bugging me really bad.
 --]]
 
 function PLUGIN:LoadData()
