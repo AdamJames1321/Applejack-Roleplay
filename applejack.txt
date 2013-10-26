@@ -1,0 +1,10 @@
+"CityRP"
+{
+	"base"		"sandbox"
+	    "title"  "CityRP"
+	    "menusystem"	"1"
+
+	    "icon"  ""
+	    "info"  ""
+	    "hide"  "0"
+}
