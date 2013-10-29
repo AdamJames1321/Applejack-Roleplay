@@ -292,7 +292,7 @@ function PANEL:Init()
 
 	-- Create the space used label.
 	self.spaceUsed = vgui.Create("DLabel", self);
-	self.spaceUsed:SetText("Space Used: "..cider.inventory.getSize().." items of "..maximumSpace.." items slots available.");
+	self.spaceUsed:SetText("Space Used: "..cider.inventory.getSize().."/"..maximumSpace);
 	self.spaceUsed:SizeToContents();
 	self.spaceUsed:SetTextColor( Color(0, 0, 0, 255) );
 end
@@ -303,7 +303,7 @@ function PANEL:PerformLayout()
 
 	-- Set the position of the label.
 	self.spaceUsed:SetPos( (self:GetWide() / 2) - (self.spaceUsed:GetWide() / 2), 5 );
-	self.spaceUsed:SetText("Space Used: "..cider.inventory.getSize().." items of "..maximumSpace.." item slots available.");
+	self.spaceUsed:SetText("Space Used: "..cider.inventory.getSize().."/"..maximumSpace);
 end
 
 -- Register the panel.

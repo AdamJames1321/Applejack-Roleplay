@@ -6,9 +6,9 @@
 
 ITEM.Name			= "USP .45";
 ITEM.Size			= 1;
-ITEM.Cost			= 350;
+ITEM.Cost			= 8000;
 ITEM.Model			= "models/weapons/w_pist_usp.mdl";
-ITEM.Batch			= 5;
+ITEM.Batch			= 10;
 ITEM.Store			= true;
 ITEM.Plural			= "USP .45s";
 ITEM.Description	= "A powerful pistol with burst fire and a silencer.";

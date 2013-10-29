@@ -2,6 +2,7 @@
 	~ Base food ~
 	~ Applejack ~
 --]]
+include("item.lua");
 ITEM.Batch			= 5;
 ITEM.Size			= 1;
 ITEM.Hunger			= 0

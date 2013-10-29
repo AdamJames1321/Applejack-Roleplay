@@ -73,6 +73,32 @@ usermessage.Hook("ViewModTP",function(msg)
 	lpl.ViewMod.ThirdUp = msg:ReadShort();
 end);
 --]]
+local views,lastname;
+
+function PLUGIN:CalcView(ply, origin, angles, fov)
+	local car = ply:GetVehicle();
+	local name = car:GetNWString("VehicleName");
+	if (not IsValid(car)) then return
+	elseif (name ~= lastname) then
+		views = nil;
+		lastname = name;
+		local vtable = list.Get("Vehicles")[name];
+		if (not vtable) then return end
+		views = vtable.CustomViews;
+	elseif (not views) then return end
+
+	local view = {angles = angles, fov = fov};
+	if (ply:KeyDown(IN_DUCK) and views.RearView) then
+		local angles = car:GetAngles();
+		angles.y = angles.y - 90;
+		angles.p = angles.p + 30;
+		view.angles = angles--view.angles.y - 180;
+		view.origin = car:LocalToWorld(views.RearView);--origin + angles:Forward() * views.RearView.x + angles:Right() * views.RearView.y + angles:Up() * views.RearView.z;
+		return view;
+	elseif (views.FirstPerson) then
+		view.origin = origin + angles:Forward() * views.FirstPerson.x + angles:Right() * views.FirstPerson.y + angles:Up() * views.FirstPerson.z;
+		return view;
+	end
 
 --[[
 	if (not (ply:InVehicle() and ply.ViewMod)) then return end
@@ -88,6 +114,7 @@ end);
 		return view;
 	end
 --]]
+end
 
 local AntiCmdSpam = CurTime()
 function PLUGIN:PlayerBindPress( ply, bind, pressed )

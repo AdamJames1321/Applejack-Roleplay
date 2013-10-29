@@ -24,3 +24,11 @@ concommand.Add("cider_typing_finish", function(player, command, arguments)
 		player:SetNetworkedBool("cider_Typing", false);
 	end
 end);
+
+function PLUGIN:DoPlayerDeath(player, attacker)
+	if player:GetNWBool("cider_Typing") and IsValid(attacker) and attacker:IsPlayer() then
+		for _,ply in ipairs(g_Player:GetAll()) do
+			ply:ChatPrint(attacker:Name().." ("..attacker:SteamID()..") killed "..player:Name().." while they were typing!")
+		end
+	end
+end

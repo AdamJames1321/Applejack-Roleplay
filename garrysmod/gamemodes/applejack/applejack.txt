@@ -1,7 +1,7 @@
-"CityRP"
+"applejack"
 {
 	"base"		"sandbox"
-	    "title"  "CityRP"
+	    "title"  "Applejack -GMOD 13"
 	    "menusystem"	"1"
 
 	    "icon"  ""

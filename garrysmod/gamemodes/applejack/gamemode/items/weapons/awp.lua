@@ -6,7 +6,7 @@
 
 ITEM.Name			= "AWP";
 ITEM.Size			= 3;
-ITEM.Cost			= 8000;
+ITEM.Cost			= 40000;
 ITEM.Model			= "models/weapons/w_snip_awp.mdl";
 ITEM.Batch			= 5;
 ITEM.Store			= true;

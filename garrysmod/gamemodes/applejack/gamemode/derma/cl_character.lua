@@ -72,7 +72,7 @@ function PANEL:Think()
     
     -- Create the char control
 	self.rpname = vgui.Create("cider_Character_TextEntry", self);
-	self.rpname.label:SetText("In-Game Custom Name");
+	self.rpname.label:SetText("RPName");
 	self.rpname.label:SizeToContents();
 	self.rpname.button:SetText("Change");
 	self.rpname.button.DoClick = function()

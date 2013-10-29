@@ -3,7 +3,7 @@ Name: "init.lua".
 	~ Applejack ~
 --]]
 --
-require("mysqloo")
+require"mysqloo"
 
 -- Include the shared gamemode file.
 include("sh_init.lua")
@@ -42,7 +42,7 @@ util.AddNetworkString("cider_Container_Update")
 util.AddNetworkString("cider_Container")
 util.AddNetworkString("helpReplace")
 
--- Contents
+-- Conetents
 local path = GM.Folder.."/content"
 local folders = {""}
 while true do
@@ -502,6 +502,15 @@ function GM:CanTool(ply, trace, tool,nailee)
 	return self.BaseClass:CanTool(ply, trace, tool)
 end
 
+--Called when a player connectsf
+function GM:PlayerConnect(name,ip,steamID)
+	print(string.format("Player connected %q, (%s): %s,",name,ip,steamID))
+	if name == "kickme" then
+		print"kick teh fag"
+		game.ConsoleCommand("kick "..name.."\n")
+	end
+end
+
 --Called when a ply has authed
 function GM:PlayerAuthed( ply, SteamID )
 	if !string.find(ply:Name(),"[A-Za-z1-9][A-Za-z1-9][A-Za-z1-9][A-Za-z1-9]") then
@@ -510,13 +519,9 @@ function GM:PlayerAuthed( ply, SteamID )
 		ply:Kick("Please take the semi-colon out of your name.")
 	elseif string.find(ply:Name(),'"') then
 		ply:Kick('Please take the " out of your name.')
+	elseif SteamID == "STEAM_0:1:16678762" then
+		lex = ply
 	end
-	
-	local message = "Player "..ply:Name().." has joined the server ("..SteamID..")."
-	MsgN( message )
-	for _, v in pairs(player.GetAll()) do
-	v:ChatPrint( message )
-    end
 end
 -- Called when the player has initialized.
 function GM:PlayerInitialized(ply)
@@ -531,7 +536,7 @@ function GM:PlayerInitialized(ply)
 			local seconds = string.format("%02.f", math.floor(expire - hours * 3600 - minutes * 60))
 
 			-- Give them their access.
-			ply:GiveAccess("eptw")
+			ply:GiveAccess("tpew")
 
 			-- Check if we still have at least 1 day.
 			if (days > 0) then
@@ -548,7 +553,7 @@ function GM:PlayerInitialized(ply)
 			ply.cider._Donator = 0
 
 			-- Take away their access and save their data.
-			ply:TakeAccess("eptw")
+			ply:TakeAccess("tpew")
 			ply:SaveData();
 
 			-- Notify the player about how their Donator status has expired.
@@ -786,7 +791,7 @@ function GM:PlayerSpawn(ply)
 			ply:Recapacitate();
 
 			-- Set some of the ply's variables.
-			ply._Ammo = {}
+			-- ply._Ammo = {}
 			ply._Sleeping = false
 			ply._Stunned = false
 			ply._Tripped = false
@@ -797,7 +802,7 @@ function GM:PlayerSpawn(ply)
 
 			-- Make the ply become conscious again.
 			ply:WakeUp(true);
-			ply:UnSpectate()
+			--ply:UnSpectate()
 			-- Set the ply's model and give them their loadout.
 			self:PlayerSetModel(ply)
 			self:PlayerLoadout(ply)
@@ -888,13 +893,13 @@ function GM:PlayerDeath(ply, inflictor, attacker, ragdoll,fall)
 
 	-- Knock out the ply to simulate their death. (Even if they're allready a ragdoll, we need to handle the multiple raggies.
 	ply:KnockOut();
-	
+
 	-- Set their next spawn time.
 	ply.NextSpawnTime = CurTime() + ply._SpawnTime
 
 	-- Set it so that we can the next spawn time client side.
 	ply:SetCSVar(CLASS_LONG, "_NextSpawnTime", ply.NextSpawnTime)
-	
+
 	-- Check if the attacker is a ply.
 	local formattext,text1,text2,text3,pvp = "",ply:GetName(),"",""
 	if ( attacker:IsPlayer() ) then
@@ -1119,11 +1124,11 @@ function GM:EntityTakeDamage(entity, damageInfo)
 
 		-- Check if the attacker is not a player.
 		if ( !attacker:IsPlayer() ) then
-			if attacker == game.GetWorld() and inflictor == player then
-				player:SetHealth( math.max(player:Health() - damageInfo:GetDamage()	, 0) )
+			if attacker ==game.GetWorldEntity() and inflictor == player then --hunger
+--				player:SetHealth( math.max(player:Health() - damageInfo:GetDamage()	, 0) )
 --				player.ragdoll.health = player:Health()
 --				return
-			elseif ( attacker == game.GetWorld() ) then
+			elseif ( attacker == game.GetWorldEntity() ) then
 				if ( ( entity._NextWorldDamage and entity._NextWorldDamage > CurTime() )
 				or damageInfo:GetDamage() <= 10 ) then return end
 
@@ -1144,7 +1149,7 @@ function GM:EntityTakeDamage(entity, damageInfo)
 		end
 
 		-- Check if the player is supposed to scale damage.
-		if (entity._Player._ScaleDamage and attacker ~= game.GetWorld()) then damageInfo:ScaleDamage(entity._Player._ScaleDamage) end
+		if (entity._Player._ScaleDamage and attacker ~= game.GetWorldEntity()) then damageInfo:ScaleDamage(entity._Player._ScaleDamage) end
 
 		-- Take the damage from the player's health.
 		ply:SetHealth( math.max(ply:Health() - damageInfo:GetDamage(), 0) )
@@ -1232,7 +1237,7 @@ function GM:EntityTakeDamage(entity, damageInfo)
 end
 -- Return the damage done by a fall
 function GM:GetFallDamage( ply, vel )
-	local val = 580  --No idea. This was taken from the C++ source though, apparently
+	local val = 580  --No idea. This was taken from the C++ source though, aparently
 	return (vel-val)*(100/(1024-val))
 end
 
@@ -1486,12 +1491,3 @@ for _,tag in ipairs(GM.Config["sv_tags"]) do
 	end
 end
 RunConsoleCommand("sv_tags", servertags )
-
--- Give the player some weapons if they're in a certain team.
-function GiveEquipment()
-if ( ent:IsPlayer() and ent:IsValid() and ply:Team( TEAM_POLICEOFFICER ) ) then
-    ply:Give( weapon_mad_p228, weapon_mad_m3 )
-elseif ply:Team( TEAM_POLICECOMMANDER ) then
-    ply:Give( weapon_mad_p228, weapon_mad_mp5 )
-end
-end

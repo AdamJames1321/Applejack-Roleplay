@@ -5,10 +5,10 @@
 
 ITEM.Name			= "Bugatti Veyron";
 ITEM.Cost			= 1500000;
-ITEM.Model			= "models/tdmcars/bug_veyron.mdl";
+ITEM.Model			= "models/tdmcars/bugattiveyron.mdl";
 ITEM.Store			= true;
-ITEM.Plural			= "tdmcars_veyron";
+ITEM.Plural			= "Bugatti Veyrons";
 ITEM.Description	= "A flashy blue sportscar to show off your wealth";
-ITEM.VehicleName	= ""
+ITEM.VehicleName	= "Bugatti_Veyron"
 ITEM.Skin			= 0
 ITEM.Base			= "vehicle"

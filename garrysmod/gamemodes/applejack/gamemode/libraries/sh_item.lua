@@ -18,7 +18,7 @@ debug.getregistry().Item = meta;
 local newcat,str,count,path,total;
 function GM:LoadItems()
 	path = self.LuaFolder.."/gamemode/items/";
-	print("Applejack: Loading Item Bases:")
+	MsgN("Applejack: Loading Item Bases:")
 	for _, filename in pairs( file.Find(path.."base/*.lua", "LUA")) do
 		if (validfile(filename)) then
 			ITEM = meta();
@@ -26,11 +26,11 @@ function GM:LoadItems()
 			includecs(path.."base/"..filename);
 			ITEM.UniqueID = filename:sub(1,-5);
 			ITEM:Register();
-			print(" Loaded item base '"..ITEM.UniqueID.."'");
+			MsgN(" Loaded item base '"..ITEM.UniqueID.."'");
 		end
 	end
 	total = 0;
-	print("Applejack: Loading Categories:")
+	MsgN("Applejack: Loading Categories:")
 	local _, folders = file.Find(path.."*", "LUA")
 	for _, filename in ipairs( folders) do
 		if (validfile(filename) and not filename:find('.',1,true)) and (filename != "base") then
@@ -53,11 +53,11 @@ function GM:LoadItems()
 			end
 			str = str:sub(3);
 			total = total + count;
-			print(" Loaded category '"..filename.."' with "..count.." items:\n  "..str);
+			MsgN(" Loaded category '"..filename.."' with "..count.." items:\n  "..str);
 		end
 	end
 	ITEM,CAT = nil;
-	print("Applejack: Loaded "..total.." items in total.\n");
+	MsgN("Applejack: Loaded "..total.." items in total.\n");
 end
 
 function GM:GetItem(id)

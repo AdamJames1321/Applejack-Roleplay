@@ -7,10 +7,10 @@ function includecs(file)
 	AddCSLuaFile(file);
 end
 
-GM.Name = "Applejack";
+GM.Name = "Applejack GMOD 13";
 GM.Email = "";
-GM.Author = "Lexi, Kulo";
-GM.Website = "lexi.co.uk";
+GM.Author = "";
+GM.Website = "";
 
 GM.LuaFolder = string.sub(GM.Folder,11,-1)
 includecs("glon.lua")
@@ -100,7 +100,7 @@ local function doload(path, name, plural) -- path must be the relative path from
 	if (path:sub(-1) ~= "/") then
 		path = path.."/";
 	end
-	print("Applejack: Loading "..name.."s");
+	MsgN("Applejack: Loading "..name.."s");
 	local count = 0;
 	local subd, fname;
 	for k, v in pairs( file.Find(GM.LuaFolder.."/gamemode/"..path.."*.lua", "LUA") ) do
@@ -109,12 +109,12 @@ local function doload(path, name, plural) -- path must be the relative path from
 			fname = v:sub(4,-5);
 			if (subd == "sh_") then
 				includecs(path..v);
-				print(" Loaded the shared "..fname.." "..name..".");
+				MsgN(" Loaded the shared "..fname.." "..name..".");
 				count = count + 1;
 			elseif (SERVER) then
 				if (subd == "sv_") then
 					include(path..v);
-					print(" Loaded the serverside "..fname.." "..name..".");
+					MsgN(" Loaded the serverside "..fname.." "..name..".");
 					count = count + 1;
 				elseif (subd == "cl_") then
 					AddCSLuaFile(path..v);
@@ -122,11 +122,11 @@ local function doload(path, name, plural) -- path must be the relative path from
 			elseif (subd == "cl_") then
 				include(path..v);
 				count = count + 1;
-				print(" Loaded the clientsideside "..fname.." "..name..".");
+				MsgN(" Loaded the clientsideside "..fname.." "..name..".");
 			end
 		end
 	end
-	print("Applejack: Loaded "..count.." "..name.."s.\n")
+	MsgN("Applejack: Loaded "..count.." "..name.."s.\n")
 end
 doload("libraries/",     "Library",   "Libraries");
 doload("metatables/",  "Metatable",  "Metatables");

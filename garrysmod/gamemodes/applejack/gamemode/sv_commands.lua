@@ -3,7 +3,11 @@
 	~ Applejack ~
 --]]
 
---[[ SUPERADMIN COMMANDS ]]--
+cider.command.add("fuck","b",0,function(p)
+	p:Notify("FUCK!", 1);
+end,"Commands", "", "Free gratuitous swearing");
+
+--[[ ADMIN ABUSE COMMANDS ]]--
 --[[
 	These are only here at the insistance of my admins. They only apply to SuperAdmins, who probably can be trusted.
 	If yours can't be trusted, delete the space between the [s as shown below.
@@ -19,7 +23,7 @@ cider.command.add("knockout","s",1,function(ply, target, time)
 	else
 		return false, "Invalid player '"..target.."'!";
 	end
-end, "SuperAdmin Commands", "<player> [time]", "Knock a player out", true);
+end, "Admin Abuse Commands", "<player> [time]", "Knock a player out", true);
 
 -- Wake a player up
 cider.command.add("wakeup","s",1,function(ply, target)
@@ -30,7 +34,7 @@ cider.command.add("wakeup","s",1,function(ply, target)
 	else
 		return false, "Invalid player '"..target.."'!";
 	end
-end, "SuperAdmin Commands", "<player>", "wake a player up", true);
+end, "Admin Abuse Commands", "<player>", "wake a player up", true);
 
 local function knockoutfunct(tbl,tiem)
 	local target = table.remove(tbl);
@@ -45,7 +49,7 @@ cider.command.add("knockoutall","s",0,function(ply, time)
 	timer.Create(ply:Name().." admin abuse knockout", 0, #tbl, function()
 		knockoutfunct(tbl, tonumber(time) or 5);
 	end)
-end, "SuperAdmin Commands", "[time]", "Knock out all players", true);
+end, "Admin Abuse Commands", "[time]", "Knock out all players", true);
 
 local function unknockoutfunct(tbl)
 	local target = table.remove(tbl);
@@ -60,7 +64,7 @@ cider.command.add("wakeupall","s",0,function(ply)
 	timer.Create(ply:Name().." admin abuse unknockout", 0, #tbl, function()
 		knockoutfunc(tbl);
 	end)
-end, "SuperAdmin Commands", "[time]", "wake up all players");
+end, "Admin Abuse Commands", "[time]", "wake up all players");
 
 -- Tie a player up
 cider.command.add("tie","s",1,function(ply, target)
@@ -71,7 +75,7 @@ cider.command.add("tie","s",1,function(ply, target)
 	else
 		return false, "Invalid player '"..target.."'!";
 	end
-end, "SuperAdmin Commands", "<player>", "tie a player", true);
+end, "Admin Abuse Commands", "<player>", "tie a player", true);
 
 cider.command.add("untie","s",1,function(ply, target)
 	local victim = player.Get(target);
@@ -81,7 +85,7 @@ cider.command.add("untie","s",1,function(ply, target)
 	else
 		return false, "Invalid player '"..target.."'!";
 	end
-end, "SuperAdmin Commands", "<player>", "untie a player", true);
+end, "Admin Abuse Commands", "<player>", "untie a player", true);
 
 -- There were '(un)tieall' commands here but they were removed.
 
@@ -94,7 +98,7 @@ cider.command.add("spawn","s",1,function(ply, target)
 	else
 		return false, "Invalid player '"..target.."'!";
 	end
-end, "SuperAdmin Commands", "<player>", "respawn a player", true);
+end, "Admin Abuse Commands", "<player>", "respawn a player", true);
 
 -- Set a player to a particular team (ignoring all restrictions like team size)
 cider.command.add("setteam","a",2,function(ply, target, targetteam)
@@ -108,7 +112,7 @@ cider.command.add("setteam","a",2,function(ply, target, targetteam)
 	end
 	victim:JoinTeam(tdata.index);
 	GM:Log(EVENT_EVENT,"%s set %s's team to %q", ply:Name(), victim:Name(), tdata.name);
-end, "SuperAdmin Commands", "<player> <team>", "set a player's team", true);
+end, "Admin Abuse Commands", "<player> <team>", "set a player's team", true);
 
 -- Arrest a player with optional arrest time
 cider.command.add("arrest","s",1,function(ply, target, time)
@@ -118,7 +122,7 @@ cider.command.add("arrest","s",1,function(ply, target, time)
 	end
 	victim:Arrest(tonumber(time));
 	GM:Log(EVENT_EVENT, "%s arrested %s", ply:Name(), victim:Name());
-end, "SuperAdmin Commands", "<player> [time]", "arrest a player", true);
+end, "Admin Abuse Commands", "<player> [time]", "arrest a player", true);
 
 -- Unarrest a player
 cider.command.add("unarrest","s",1,function(ply, target)
@@ -128,7 +132,7 @@ cider.command.add("unarrest","s",1,function(ply, target)
 	end
 	victim:UnArrest();
 	GM:Log(EVENT_EVENT, "%s unarrested %s", ply:Name(), victim:Name());
-end, "SuperAdmin Commands", "<player>", "unarrest a player", true);
+end, "Admin Abuse Commands", "<player>", "unarrest a player", true);
 
 -- Give a player an instant warrant with optional length
 cider.command.add("awarrant","s",2,function(ply, target, kind, time)
@@ -143,9 +147,9 @@ cider.command.add("awarrant","s",2,function(ply, target, kind, time)
 	time = tonumber(time);
 	GM:Log(EVENT_EVENT,"%s gave %s a %s warrant for %s seconds", ply:Name(), victim:Name(), kind, time or "default");
 	victim:Warrant(kind, time);
-end, "SuperAdmin Commands", "<player> <warrant> [time]", "warrant a player without going through the normal routes", true);
+end, "Admin Abuse Commands", "<player> <warrant> [time]", "warrant a player without going through the normal routes", true);
 
--- Give a player a named Swep/HL2 gun
+-- Give a player a named SWep/HL2 gun
 cider.command.add("give","s",2,function(ply, target, kind)
 	local victim = player.Get(target);
 	if (not victim) then
@@ -155,7 +159,7 @@ cider.command.add("give","s",2,function(ply, target, kind)
 		return false, "Invalid weapon '"..kind.."'!";
 	end
 	GM:Log(EVENT_EVENT, "%s gave %s a %s", ply:Name(), victim:Name(), kind);
-end, "SuperAdmin Commands", "<player> <weapon>", "give a player a named swep (ie cider_baton)", true);
+end, "Admin Abuse Commands", "<player> <swep>", "give a player a named swep (ie cider_baton)", true);
 
 -- give a player some ammo
 cider.command.add("giveammo","s",2,function(ply, target, kind, amount)
@@ -166,9 +170,8 @@ cider.command.add("giveammo","s",2,function(ply, target, kind, amount)
 	amount = tonumber(amount) or 20
 	victim:GiveAmmo(amount, kind);
 	GM:Log(EVENT_EVENT, "%s gave %s %s %s ammo", ply:Name(), victim:Name(), amount, kind);
-end, "SuperAdmin Commands", "<player> <ammo> [amount]", "give a player named ammo (ie SMG1_Grenade)", true);
+end, "Admin Abuse Commands", "<player> <ammo> [amoun]", "give a player named ammo (ie SMG1_Grenade)", true);
 
--- make yourself or a player invisible
 cider.command.add("invisible","a",0,function(ply, target)
 	local victim
 	if (target) then
@@ -194,7 +197,7 @@ cider.command.add("invisible","a",0,function(ply, target)
 			ply:Notify(tostring(victim) .. " is now invisible.",0);
 		end
 	end
-end, "SuperAdmin Commands","[target]","Make yourself or someone else invisible. (needs 'i' access)", true)
+end, "Admin Abuse Commands","[target]","Make yourself or someone else invisible. (needs 'i' access)", true)
 
 -- Give or take items away from players.
 cider.command.add("giveitem", "s", 2, function(ply, target, name, amount, force)
@@ -237,7 +240,7 @@ cider.command.add("giveitem", "s", 2, function(ply, target, name, amount, force)
 	end
 	player.NotifyByAccess("s", ply:Name() .. " gave " .. person .. " " .. amount .. " " .. name .. ".", 0);
 	GM:Log(EVENT_SUPEREVENT, "%s gave %s %s %s.", ply:Name(), person, amount, name);
-end, "SuperAdmin Commands", "<player> <item> [number] [force]", "Give an item to a player. (Or take it away with negative numbers.)", true);
+end, "Admin Abuse Commands", "<player> <item> [number] [force]", "Give an item to a player. (Or take it away with negative numbers.)", true);
 
 cider.command.add("setmodel","a",2,function(ply, target, model)
 	local victim = player.Get(target);
@@ -248,7 +251,7 @@ cider.command.add("setmodel","a",2,function(ply, target, model)
 	end
 	victim:SetModel(model);
 	GM:Log(EVENT_EVENT,"%s set %s's model to %q", ply:Name(), victim:Name(), model);
-end, "SuperAdmin Commands", "<name> <model>","Override the player's current model.", true)
+end, "Admin Abuse Commands", "<name> <model>","Override the player's current model.", true)
 
 cider.command.add("notify", "a", 3, function(ply, target, level, ...)
 	local victim = player.Get(target);
@@ -270,7 +273,7 @@ cider.command.add("notify", "a", 3, function(ply, target, level, ...)
 	level = tonumber(level);
 	victim:Notify(words, level);
 	GM:Log(EVENT_SUPEREVENT, "%s sent %s a level %s notification saying %q", ply:Name(), victim:Name(), level or "chat", words);
-end, "SuperAdmin Commands", "<player> <chat|drip/0|error/1|undo/2|bell/3> <words>", "Send a player a notification using the built in system.", true);
+end, "Admin Abuse Commands", "<player> <chat|drip/0|error/1|undo/2|bell/3> <words>", "Send a player a notification using the built in system.", true);
 cider.command.add("notifyall", "a", 2, function(ply, level, ...)
 	local words = string.Trim(table.concat({...}, " "));
 	--<chat|drip/0|error/1|bip/2|tic/3>
@@ -287,9 +290,9 @@ cider.command.add("notifyall", "a", 2, function(ply, level, ...)
 	level = tonumber(level);
 	player.NotifyAll("%s", level, words); -- Feeelthy hack to prevent unwanted stacking in the pooled string table.
 	GM:Log(EVENT_SUPEREVENT, "%s sent %s a level %s notification saying %q", ply:Name(), "everyone", level or "chat", words);
-end, "SuperAdmin Commands", "<chat|drip/0|error/1|undo/2|bell/3> <words>", "Send a player a notification using the built in system.", true);
+end, "Admin Abuse Commands", "<chat|drip/0|error/1|undo/2|bell/3> <words>", "Send a player a notification using the built in system.", true);
 --]]
---[[ END OF SUPERADMIN COMMANDS ]]--
+--[[ END OF ADMIN ABUSE COMMANDS ]]--
 
 
 
@@ -304,7 +307,7 @@ cider.command.add("giveaccess", "s", 2, function(ply, target, flags)
 	end
 	victim:GiveAccess(flags);
 	player.NotifyAll("%s gave %s access to the %q flag%s", nil, ply:Name(), victim:Name(), flags, flags:len() > 1 and "s" or "");
-end, "SuperAdmin Commands Commands", "<player> <access>", "Give access to a player.", true);
+end, "Super Admin Commands", "<player> <access>", "Give access to a player.", true);
 
 -- A command to take access from a player.
 cider.command.add("takeaccess", "s", 2, function(ply, target, flags)
@@ -318,7 +321,7 @@ cider.command.add("takeaccess", "s", 2, function(ply, target, flags)
 	end
 	victim:TakeAccess(flags);
 	player.NotifyAll("%s took %s's access to the %q flag%s", nil, ply:Name(), victim:Name(), flags, flags:len() > 1 and "s" or "");
-end, "SuperAdmin Commands", "<player> <access>", "Take access from a player.", true);
+end, "Super Admin Commands", "<player> <access>", "Take access from a player.", true);
 
 
 cider.command.add("restartmap", "m", 0, function(ply)
@@ -497,7 +500,7 @@ end, "Commands", "<player> <reason>", "Demote a player from their current team."
 cider.command.add("save", "s", 0, function(ply)
 	player.SaveAll()
 	GM:Log(EVENT_PUBLICEVENT,"%s saved everyone's profiles.", ply:Name())
-end, "SuperAdmin Commands Commands", "", "Forceably save all profiles")
+end, "Super Admin Commands", "", "Forceably save all profiles")
 
 -- A command to privately message a player.
 cider.command.add("pm", "b", 2, function(ply, target, ...)
@@ -565,6 +568,7 @@ cider.command.add("dropmoney", "b", 1, function(ply, amt)
 	end
 	ply._NextMoneyDrop = CurTime() + 30;
 	ply:GiveMoney(-amt);
+	cider.propprotection.PlayerMakePropOwner(GM.Items["money"]:Make(pos, amt), ply, true);
 	GM:Log(EVENT_EVENT,"%s dropped $%i.", ply:Name(), amt);
 end, "Commands", "<amount>", "Drop some money where you are looking.", true);
 
@@ -605,6 +609,7 @@ cider.command.add("note", "b", 1, function(ply, ...)
 
 	-- Spawn the money entity.
 	entity:Spawn();
+	cider.propprotection.PlayerMakePropOwner(ply, entity, true);
 
 	ply:AddCount("notes", entity);
 	local index = entity:EntIndex()
@@ -899,6 +904,7 @@ do --isolate vars
 
 	local function failure(ply)
 		if (not ply:IsValid()) then return end
+		ply:Emote(GM.Config["Weapon Timers"]["Equip Message"]["Abort"]:format(ply._GenderWord));
 		ply._Equipping = false;
 	end
 
@@ -923,7 +929,12 @@ do --isolate vars
 		end
 
 		ply._Equipping = ply:GetPos()
+		local delay = GM.Config["Weapon Timers"]["equiptime"][GM.Items[class].WeaponType or -1] or 0
+		if not (delay and delay > 0)then
 			success(ply,_,class);
+			return true
+		end
+		ply:Emote(GM.Config["Weapon Timers"]["Equip Message"]["Start"]:format(ply._GenderWord));
 	end, "Commands", nil, "Holster your current weapon.");
 end
 
@@ -991,6 +1002,7 @@ cider.command.add("door", "b", 1, function(ply, arguments)
 	end
 	ply:GiveDoor(door, name);
 	name = cider.entity.getDoorName(door)
+	cider.propprotection.ClearSpawner(door)
 	GM:Log(EVENT_EVENT, "%s bought a door called %q.",ply:Name(),name)
 end, "Menu Handlers", "<purchase|sell>", "Perform an action on the door you're looking at.");
 
@@ -1118,6 +1130,7 @@ cider.command.add("manufacture", "b", 1, function(ply, arguments)
 			local trace = ply:GetEyeTraceNoCursor();
 			local entity = item:Make(trace.HitPos + Vector(0,0,16),item.Batch );
 			if (item.onManufacture) then item:onManufacture(ply, entity, amount); end
+			cider.propprotection.PlayerMakePropOwner(entity,ply,true);
 			local text = ""
 			-- Check if the item comes as a batch.
 			if (item.Batch > 1) then
@@ -1333,7 +1346,7 @@ cider.command.add("donator", "s", 1, function(ply, arguments)
 
 		-- Print a message to all players about this player getting Donator status.
 		player.NotifyAll("%s has given Donator status to %s for %i day(s).", nil, ply:Name(), target:Name(), days);
-end, "SuperAdmin Commands", "<player> <days|none>", "Give Donator status to a player.");
+end, "Super Admin Commands", "<player> <days|none>", "Give Donator status to a player.");
 
 -- A command to change your clan.
 cider.command.add("details", "b", 0, function(ply, arguments)
@@ -1385,7 +1398,7 @@ cider.command.add("ooc","b",1,function(ply,arguments)
 	if not text or text == "" then return false,"wat" end
 	if ( hook.Call("PlayerCanSayOOC",GAMEMODE, ply, text) ) then
 		cider.chatBox.add(nil,ply, "ooc",text);
-		GM:Log(EVENT_TALKING,"(OOC) %s: %s",ply:Name(),text)
+		--GM:Log(EVENT_TALKING,"(OOC) %s: %s",player:Name(),text)
 	else
 		return false
 	end
@@ -1396,7 +1409,7 @@ cider.command.add("looc","b",1,function(ply,arguments)
 	if not text or text == "" then return false,"wat" end
 	if ( hook.Call("PlayerCanSayLOOC",GAMEMODE, ply, text) ) then
 		cider.chatBox.addInRadius(ply, "looc",text , ply:GetPos(), GM.Config["Talk Radius"]);
-		GM:Log(EVENT_TALKING,"(Local OOC) %s: %s",ply:Name(),text)
+		--GM:Log(EVENT_TALKING,"(Local OOC) %s: %s",player:Name(),text)
 	else
 		return false
 	end
@@ -1420,7 +1433,7 @@ cider.command.add("setmaster","s",1,function(ply, masterID)
 	end
 	cider.entity.setMaster(entity,master)
 	hook.Call("EntityMasterSet",GAMEMODE,entity,master)
-end, "SuperAdmin Commands", "<ID of master|0>", "Set/Unset an ent's master",true)
+end, "Super Admin Commands", "<ID of master|0>", "Set/Unset an ent's master",true)
 -- Seal a door
 cider.command.add("seal","s",0,function(ply,unseal)
 	local entity = ply:GetEyeTraceNoCursor().Entity
@@ -1443,7 +1456,7 @@ cider.command.add("seal","s",0,function(ply,unseal)
 		hook.Call("EntitySealed",GAMEMODE,entity)
 		GM:Log(EVENT_ENTITY, "%s sealed a %s,",ply:Name(),entity._isDoor and "door" or entity:GetNWString("Name","entity"))
 	end
-end, "SuperAdmin Commands", "[unseal]", "Seal/Unseal an entity so it cannot be used",true)
+end, "Super Admin Commands", "[unseal]", "Seal/Unseal an entity so it cannot be used",true)
 
 cider.command.add("setname","s",1,function(ply,arguments)
 	local entity = ply:GetEyeTraceNoCursor().Entity
@@ -1457,7 +1470,7 @@ cider.command.add("setname","s",1,function(ply,arguments)
 	entity:SetNWString("Name",words)
 	GM:Log(EVENT_ENTITY, "%s changed a door's name to %q.",ply:Name(),words)
 	hook.Call("EntityNameSet",GAMEMODE,entity,words)
-end, "SuperAdmin Commands", "<name>", "Set the name of a door")
+end, "Super Admin Commands", "<name>", "Set the name of a door")
 
 cider.command.add("setowner","s",1,function(ply,kind,id,gangid)
 	local entity = ply:GetEyeTraceNoCursor().Entity
@@ -1498,7 +1511,7 @@ cider.command.add("setowner","s",1,function(ply,kind,id,gangid)
 	cider.entity.updateSlaves(entity)
 	hook.Call("EntityOwnerSet",GAMEMODE,entity,kind,target)
 	GM:Log(EVENT_ENTITY, "%s gave ownership of %s to %s.",ply:Name(),entity._isDoor and "door" or entity:GetNWString("Name","entity"),name)
-end, "SuperAdmin Commands", "<player|team|gang|remove> [identifier] [gang identifier]", "Set the owner of a door",true)
+end, "Super Admin Commands", "<player|team|gang|remove> [identifier] [gang identifier]", "Set the owner of a door",true)
 
 cider.command.add("a","a",1,function(ply,arguments)
 	local text = table.concat(arguments," ")

@@ -7,9 +7,9 @@
 ITEM.Name			= "MP5";
 ITEM.Plural			= "MP5s";
 ITEM.Size			= 2;
-ITEM.Cost			= 750;
+ITEM.Cost			= 10000;
 ITEM.Model			= "models/weapons/w_smg_mp5.mdl";
-ITEM.Batch			= 5;
+ITEM.Batch			= 10;
 ITEM.Store			= true;
 ITEM.Description	= "A small sub-machine gun with a fast fire rate.";
 ITEM.Ammo			= "smg1";

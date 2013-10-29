@@ -81,13 +81,13 @@ function PANEL:Init()
 	self.tabs = vgui.Create("DPropertySheet", self);
 
 	-- Add the sheets for the other menus to the property sheet.
-	self.tabs:AddSheet("Rules", vgui.Create("cider_Rules", self.tabs), "gui/silkicons/exclamation");
 	self.tabs:AddSheet("Character", vgui.Create("cider_Character", self.tabs), "gui/silkicons/user");
+	self.tabs:AddSheet("Help", vgui.Create("cider_Help", self.tabs), "gui/silkicons/page");
+	self.tabs:AddSheet("Laws", vgui.Create("cider_Laws",self.tabs),"gui/silkicons/world");
+	self.tabs:AddSheet("Rules", vgui.Create("cider_Rules", self.tabs), "gui/silkicons/exclamation");
 	self.tabs:AddSheet("Inventory", vgui.Create("cider_Inventory", self.tabs), "gui/silkicons/application_view_tile");
 	self.tabs:AddSheet("Store", vgui.Create("cider_Store", self.tabs), "gui/silkicons/box");
-	self.tabs:AddSheet("Laws", vgui.Create("cider_Laws",self.tabs),"gui/silkicons/world");
-	self.tabs:AddSheet("Updates",vgui.Create("cider_Changelog", self.tabs), "gui/silkicons/page_white_wrench");
-	self.tabs:AddSheet("Help", vgui.Create("cider_Help", self.tabs), "gui/silkicons/page");
+	self.tabs:AddSheet("Changelog",vgui.Create("cider_Changelog", self.tabs), "gui/silkicons/plugin");
 	self.tabs:AddSheet("Donate", vgui.Create("cider_Donate", self.tabs), "gui/silkicons/heart");
 	self.tabs:AddSheet("Credits",vgui.Create("cider_Credits",self.tabs), "gui/silkicons/group");
 	--self.tabs:AddSheet("Log",vgui.Create("cider_Log",self.tabs), "gui/silkicons/page_white_magnify");

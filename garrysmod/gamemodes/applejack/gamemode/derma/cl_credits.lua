@@ -8,9 +8,20 @@ local PANEL = {};
 -- Store the credits in a string.
 PANEL.credits = [[
 [Credits]
-Kudomiku - Created the base gamemode and implemented it.
-Lexi - Fixed this gamemode from Kudomiku's Mess.
-Collin - Converting Gamemode to GMOD 13 - with permissions from Lexi to resell/update.
+kuromeku - kuromeku@gmail.com - http://conna.org - Made the core systems of Cider, populated it with items and released it.
+Lexi - mwaness@gmail.com - http://www.ventmob.com/ - Vast swathes of improvements to the script, going with the philosophy that "Light RP doesn't have to be shit."
+Drewley - http://www.ventmob.com/ - Hosting the VM server that this script was born on, minor edits.
+Jayhawk - www.thebluecommunity.com - Creating awesome textures
+[Works included in modified form]
+-[SB]- Spy - The SMod Leg SWep
+NoVa - VU Mod
+High6 - Door STool
+Athos - The corvette and golf
+Spacetech - Simple Prop Protection
+Kogitsune - Various
+[Thanks]
+The various people of the Lua section of Facepunch - Helping me fix stuff
+
 ]]
 
 -- Called when the panel is initialized.

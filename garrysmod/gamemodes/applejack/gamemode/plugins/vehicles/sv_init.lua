@@ -133,7 +133,7 @@ function PLUGIN:PlayerSpawnedVehicle(ply, car)
 		for i,v in ipairs(tab.Passengers) do
 			seat = ents.Create"prop_vehicle_prisoner_pod";
 			if (not IsValid(seat)) then
-				error("Cannot spawn seat entity!")
+				error("Canont spawn seat entity!")
 			end
 			seat:SetModel(data.Model);
 			seat:SetKeyValue("vehiclescript", "scripts/vehicles/prisoner_pod.txt");

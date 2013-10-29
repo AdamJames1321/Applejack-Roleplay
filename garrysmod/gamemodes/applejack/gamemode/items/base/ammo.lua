@@ -6,6 +6,7 @@
 		 to give the player ammo when used.
 	~]
 --]]
+include("item.lua");
 ITEM.Equippable		= true
 ITEM.Equipword		= "load"
 ITEM.Ammo			= {"",0};

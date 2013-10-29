@@ -1,4 +1,4 @@
-
+include("item.lua");
 ITEM.Batch			= 1;
 ITEM.Size			= 1;
 ITEM.Equippable		= true

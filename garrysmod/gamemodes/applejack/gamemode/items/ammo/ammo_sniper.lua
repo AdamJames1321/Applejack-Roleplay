@@ -5,7 +5,7 @@
 
 ITEM.Name			= "Sniper Ammo";
 ITEM.Size			= 1;
-ITEM.Cost			= 150;
+ITEM.Cost			= 1500;
 ITEM.Model			= "models/items/357ammobox.mdl";
 ITEM.Batch			= 10;
 ITEM.Store			= true;

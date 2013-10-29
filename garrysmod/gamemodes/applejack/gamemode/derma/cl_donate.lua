@@ -7,7 +7,9 @@ local PANEL = {};
 
 -- Store the services in a string.
 PANEL.services = [[
-Enter your server donation details here!
+Official Forum Thread: donate link 
+
+donate details here
 ]];
 
 -- Called when the panel is initialized.

@@ -5,7 +5,16 @@ Name: "sh_laws.lua".
 
 cider.laws = {};
 cider.laws.stored = {
-    "No Laws at the moment."
+	"No Running",
+	"No Throwing",
+	"No Pushing",
+	"No Shouting",
+	"No Jumping",
+	"No Splashing",
+	"No Bombing",
+	"No Ducking",
+	"No Petting",
+	"No Armbands Beyond This Point" -- I love how surreal this is, but no one ever comments on it. *SIGH*
 }
 
 if SERVER then
@@ -39,7 +48,7 @@ if SERVER then
 			return
 		end
 		cider.laws.update(decoded)
-		player.NotifyAll(ply:GetName().." just updated the city laws.",0)
+		player.NotifyAll(ply:GetName().." just updated the city laws",0)
 	end net.Receive( "cider_Laws",  getLaws );
 else
 	cider.laws.update = true

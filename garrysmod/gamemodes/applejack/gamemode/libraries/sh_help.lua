@@ -22,11 +22,11 @@ if (CLIENT) then
 		end
 	end);
 else
-	--[[ Add generic helps TODO: Do better ]]--
+	--[[ Add generic helps TODO: Do bettr ]]--
 	cider.help.add("General", "For more information, hover your mouse over entries.");
 	cider.help.add("General", "Using any exploits will get you banned permanently.");
-	cider.help.add("General", "Put // before your message to talk in Global OOC.");
-	cider.help.add("General", "Put .// before your message to talk in Local OOC.");
+	cider.help.add("General", "Put // before your message to talk in global OOC.");
+	cider.help.add("General", "Put .// before your message to talk in local OOC.");
 	cider.help.add("General", "Press F1 to see the main menu.");
 	cider.help.add("General", "Press F2 to see the ownership menu.");
 	hook.Add("PlayerInitialized","Applejack Help Spammer", function(ply)

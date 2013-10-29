@@ -328,6 +328,8 @@ function meta:KnockOut(time, velocity)
 	-- Stops the ragdoll colliding with players, to prevent accidental/intentional stupid deaths.
 	ragdoll:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 
+	-- Gief to world to prevent people picking it up and waving it about
+	cider.propprotection.GiveToWorld(ragdoll);
 	-- Pose the ragdoll in the same shape as us
 	for i, matrix in pairs(bones) do
 		ragdoll:SetBoneMatrix(i, matrix);
@@ -520,7 +522,7 @@ end
 local function arresttimer(ply)
 	if (not IsValid(ply)) then return end
 	ply:UnArrest(true);
-	ply:Notify("You've been letted out of jail!");
+	ply:Notify("Your arrest time has finished!");
 	ply:Spawn(); -- Let the player out of jail
 end
 ---
@@ -684,7 +686,10 @@ local function getKVs(ply)
 	for k,v in pairs(ply.cider) do
 --		print(k,v)
 		value = nil;
-		if (player.saveFunctions[k]) then
+		if (player.saveIgnoreKeys[k]) then
+--			print"ignoran"
+			value = false;
+		elseif (player.saveFunctions[k]) then
 --			print"funcshan"
 			value = player.saveFunctions[k](ply, v);
 		elseif (type(v) == "table") then
@@ -744,6 +749,7 @@ function meta:SaveData(create)
 --	print(query);
 	local name = self:Name(); -- In case they leave and then cause an error.
 	GAMEMODE:Query(query, function()
+		GM:Log(EVENT_SQLDEBUG,"SQL Statement successful for %q", name);
 	end);
 end
 

@@ -46,7 +46,7 @@ function PLUGIN:PlayerTenthSecond(player)
 		if (player._Stamina <= 1) then
 			player:Incapacitate();
 			player:SetNWBool("Exausted", true)
-		elseif player._Stamina > 50 and player:GetNWBool"Exausted" then
+		elseif player._Stamina <= 50 and player:GetNWBool"Exausted" then
 			-- If you get exausted, it takes a while to wear off. ;)
 		else
 			local r= player._Stamina / 100

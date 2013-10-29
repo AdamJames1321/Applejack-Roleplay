@@ -32,7 +32,7 @@ end
 --]]
 function GM:LoadPlugins()
 	local count = 0;
-	print("Applejack: Loading Plugins:");
+	MsgN("Applejack: Loading Plugins:");
 	local path = self.LuaFolder.."/gamemode/plugins/";
 	local _, folder = file.Find(path.."*", "LUA")
 	for _,id in pairs(folder) do
@@ -48,7 +48,7 @@ function GM:LoadPlugins()
 				include(path..id.."/cl_init.lua");
 			end
 			if (PLUGIN.Name) then
-				print(" Loaded plugin '"..PLUGIN.Name.."'")
+				MsgN(" Loaded plugin '"..PLUGIN.Name.."'")
 				stored[id] = PLUGIN;
 				count = count + 1;
 			end
@@ -58,7 +58,7 @@ function GM:LoadPlugins()
 	if (self.Inited) then
 		hook.Call("LoadData",self);
 	end
-	print("Applejack: Loaded ",count," plugins.\n");
+	MsgN("Applejack: Loaded ",count," plugins.\n");
 end
 
 -- Concommand for debug

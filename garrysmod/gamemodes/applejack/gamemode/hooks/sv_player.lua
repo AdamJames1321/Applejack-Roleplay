@@ -6,7 +6,7 @@
 -- @name GM
 -- @class table
 -- @description The gamemode table. In this case, the serverside player hooks section of it. This is a reference of every hook that could be called on the player only on the server that the gamemode deals with.
-local GM = GM or GAMEMODE;
+local GM = GM;
 
 ---
 -- Called when a player's warrant timer ends.

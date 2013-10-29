@@ -78,11 +78,10 @@ usermessage.Hook("Notification", function(msg)
 
 	-- Play the sound to the local player.
 	surface.PlaySound(sound);
-	
-	-- Notify the player.
-	GAMEMODE:AddNotify(message, class, 10);
-	LocalPlayer():PrintMessage( HUD_PRINTNOTIFY, message);
 
+	-- Add the notification using Garry's system.
+	GAMEMODE:AddNotify(message, class, 10);
+	LocalPlayer():PrintMessage(HUD_PRINTCONSOLE, message);
 end);
 
 function GM:PlayerNoClip(player)
@@ -385,7 +384,14 @@ function GM:HUDPaintESP()
 						if IsValid( tent:GetNetworkedEntity("Player") ) then
 							player = tent:GetNetworkedEntity("Player");
 						end
-						lines:Add("Name",player:Name(),team.GetColor( player:Team() ),1)
+						-- Draw the player's name.
+						local addon = ""
+						if tent:GetNWBool("cider_Corpse") then
+							addon = "'s corpse"
+						elseif !player:Alive() then
+							addon = " (dead)"
+						end
+						lines:Add("Name",player:Name()..addon,team.GetColor( player:Team() ),1)
 						local statuslines = 0
 						if player:GetNetworkedBool("Arrested") then
 							lines:Add("Status"..statuslines,"(Arrested)",color_red,2+statuslines)
@@ -564,7 +570,7 @@ function GM:HUDDrawScoreBoard()
 		draw.DrawText("Loading!", "ChatFont", ScrW() / 2, ScrH() / 2, color_white, 1, 1);
 
 		-- Let them know how to rejoin if they are stuck.
-		draw.DrawText("The gamemode has crashed. If you're stuck here, call an Admin for a server restart!", "ChatFont", ScrW() / 2, ScrH() / 2 + 32, Color(255, 50, 25, 255), 1, 1);
+		draw.DrawText("Press 'Jump' to rejoin if you are stuck on this screen!", "ChatFont", ScrW() / 2, ScrH() / 2 + 32, Color(255, 50, 25, 255), 1, 1);
 	end
 end
 
@@ -598,9 +604,9 @@ function GM:DrawPlayerInformation()
 
 	-- Insert the player's information into the text table.
 	table.insert( text, {"Gender: "..(lpl._Gender or "Male"), "gui/silkicons/heart"} );
-	table.insert( text, {"Salary: $"..(lpl._Salary or 0), "gui/silkicons/money"} );
-	table.insert( text, {"Money: $"..(lpl._Money or 0), "gui/silkicons/money"} );
-	table.insert( text, {"Details: "..lpl:GetNetworkedString("Details"), "gui/silkicons/pencil"});
+	table.insert( text, {"Salary: $"..(lpl._Salary or 0), "gui/silkicons/folder_go"} );
+	table.insert( text, {"Money: $"..(lpl._Money or 0), "gui/silkicons/star"} );
+	table.insert( text, {"Details: "..lpl:GetNetworkedString("Details"), "gui/silkicons/status_offline"});
 	table.insert( text, {"Clan: "..lpl:GetNetworkedString("Clan"), "gui/silkicons/group"} );
 	table.insert( text, {"Job: "..lpl:GetNetworkedString("Job"), "gui/silkicons/wrench"} );
 
@@ -771,7 +777,7 @@ function GM:DrawTopText(text)
 	end
 	-- Check if the player is wearing kevlar.
 	if (lpl._ScaleDamage == 0.5) then
-		text.y = self:DrawInformation("You are wearing a kevlar which reduces damage taken by 50%.", "ChatFont", text.x, text.y, color_pink, 255, true, function(x, y, width, height)
+		text.y = self:DrawInformation("You are wearing kevlar which reduces damage by 50%.", "ChatFont", text.x, text.y, color_pink, 255, true, function(x, y, width, height)
 			return x - width - 8, y;
 		end);
 	end
@@ -808,7 +814,9 @@ function GM:HUDPaint()
 		local text = {x = ScrW(), y = 8};
 
 		-- Draw the player's health and ammo bars.
+		if lpl:Health() < 80 then
 		self:DrawHealthBar(bar);
+		end
 		self:DrawAmmoBar(bar);
 		if lpl._JobTimeExpire and tonumber(lpl._JobTimeExpire) > CurTime() then
 			self:DrawTimerBar(bar)
@@ -831,7 +839,7 @@ function GM:HUDPaint()
 
 			-- Check if the amount of seconds is greater than 0.
 			if (seconds > 0) then
-				self:DrawInformation("You must wait "..seconds.." second(s) in order to respawn.", "ChatFont", x, y, color_white, 255);
+				self:DrawInformation("You must wait "..seconds.." second(s) to spawn.", "ChatFont", x, y, color_white, 255);
 			end
 		elseif lpl:KnockedOut() and lpl:Alive() then
 			local _BecomeConsciousTime = lpl._KnockoutPeriod or 0;
@@ -860,6 +868,9 @@ function GM:HUDPaint()
 			if seconds > 0 then
 				self:DrawInformation("You will finish the knots in "..seconds.." second(s).", "ChatFont", x, y,  color_white, 255);
 			end
+		elseif lpl._BeTied then
+			self:DrawInformation("You are being tied up!", "ChatFont", x, y, color_white, 255);
+		end
 
 		-- Get whether the player is stuck in the world.
 		local stuckInWorld = lpl._StuckInWorld;
@@ -875,7 +886,6 @@ function GM:HUDPaint()
 		-- Call the base class function.
 		self.BaseClass:HUDPaint();
 	end
-end
 end
 
 -- Called to check if a player can use voice.
@@ -985,7 +995,7 @@ usermessage.Hook("cider_ModelChoices",function(msg)
 end)
 
 function GM:Initialize()
-	--ErrorNoHalt(os.date().." - Finished connecting\n")
+	ErrorNoHalt(os.date().." - Finished connecting\n")
 	-- Call the base class function.
 	return self.BaseClass:Initialize()
 end

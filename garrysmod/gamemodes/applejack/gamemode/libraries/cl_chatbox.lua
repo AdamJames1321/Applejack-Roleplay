@@ -13,6 +13,8 @@ function chat.AddText(...)
 			str = str .. word;
 		end
 	end
+	local sound = "ambient/water/drip2.wav"; -- 'drip' generic notification
+	surface.PlaySound("ambient/water/drip2.wav");
 	-- Add the notification using Garry's system.
 	GAMEMODE:AddNotify(str, 0, 10);
 	print(str);

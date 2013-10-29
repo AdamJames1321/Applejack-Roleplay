@@ -5,7 +5,7 @@ Name: "sv_init.lua".
 -- Include the shared file and add it to the client download list.
 includecs("sh_init.lua");
 
--- Setup function
+-- Settup function
 function PLUGIN:LoadData()
 	self.group = cider.team.getGroup("Officials");
 end
@@ -71,7 +71,7 @@ function PLUGIN:PlayerDeath(ply, inflictor, killer)
 		self.Lockdown = false; -- Disable the lockdown
 		SetGlobalBool("lockdown",false);
 		cider.propprotection.CleanupPlayerProps(ply); -- Since the mayor's reign is over, his props should go.
-		ply:Demote(); -- Drop dem to da bottom
+		ply:Demote(); -- Drop dem to da bttom
 	end
 end
 

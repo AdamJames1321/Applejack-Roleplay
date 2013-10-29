@@ -321,6 +321,8 @@ function SWEP:Deploy()
 		self:OhGodGetItOff()
 	end
 
+	self.Owner._NextDeploy	= CurTime() + GM.Config["Weapon Timers"]["redeploytime" ][self.Size]
+	self.NextHolster		= CurTime() + GM.Config["Weapon Timers"]["reholstertime"][self.Size]
 	if ( self.dt.silenced ) then
 		self.Weapon:SendWeaponAnim(ACT_VM_DRAW_SILENCED);
 	else
@@ -463,10 +465,13 @@ function SWEP:Holster(wep)
 				self:StickAGunToMyBack()
 			end
 			cider.chatBox.addInRadius(self.Owner, "me",
+				GM.Config["Weapon Timers"]["holstermessage"][self.Size]:format(self.TypeName,self.Owner._GenderWord),
 				self.Owner:GetPos(), GM.Config["Talk Radius"]);
 		end
 		self:DoAmmoStuff()
 	end
+	self.Owner._NextDeploy	= CurTime() + GM.Config["Weapon Timers"]["redeploytime" ][self.Size]
+	self.NextHolster		= CurTime() + GM.Config["Weapon Timers"]["reholstertime"][self.Size]
 	self:ResetVars()
 	return true
 end

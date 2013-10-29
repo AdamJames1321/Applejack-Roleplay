@@ -5,7 +5,7 @@
 
 ITEM.Name			= "Pistol Rounds";
 ITEM.Size			= 1;
-ITEM.Cost			= 80;
+ITEM.Cost			= 800;
 ITEM.category		= CATEGORY_AMMO
 ITEM.Model			= "models/items/boxsrounds.mdl";
 ITEM.Batch			= 10;

@@ -30,7 +30,7 @@ function GM:PlayerUse(ply, ent)
 	if (ply:KnockedOut()) then
 		-- If you're unconsious, you can't use things.
 		return false
-	elseif (ply:Arrested() or ply:Tied()) then
+	elseif (ply:Arrested() or ply:Tied() or ply._Stunned) then
 		-- Prevent spam
 		if (not ply._NextNotify or CurTime() > ply._NextNotify) then
 			ply:Notify("You cannot use that while in this state!", 1);
@@ -210,8 +210,8 @@ function GM:KeyPress(ply, key)
 		and ply:KeyDown(IN_SPEED)
 		and gamemode.Call("PlayerCanUntie", ply, ent)
 		and ent:GetPos():Distance(ply:GetPos()) < 200) then
-			ply:Emote("starts looking at " .. ent:Name() .. " with a knife.");
-			timer.Simple(ply:UniqueID() .. " untying timer", self.Config['UnTying Timeout'], uttest, utwin, utfail, ply, ent, ply:GetPos(), ent:GetPos());
+			ply:Emote("starts ineffectually sawing at " .. ent:Name() .. "'s bonds with a butter knife");
+			timer.Conditional(ply:UniqueID() .. " untying timer", self.Config['UnTying Timeout'], uttest, utwin, utfail, ply, ent, ply:GetPos(), ent:GetPos());
 			ply._UnTying = true;
 			ent._beUnTied = true;
 		--[[~ Open mah doors ~]]--

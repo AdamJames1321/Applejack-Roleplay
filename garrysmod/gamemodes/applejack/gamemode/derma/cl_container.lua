@@ -11,6 +11,7 @@ local function closeMenu()
 		containermenu:Close()
 		containermenu:Remove()
 		gui.EnableScreenClicker(false)
+		RunConsoleCommand"MommyIAmDoneWithTheContainerNow"
 	end
 end
 usermessage.Hook("cider_CloseContainerMenu",closeMenu)

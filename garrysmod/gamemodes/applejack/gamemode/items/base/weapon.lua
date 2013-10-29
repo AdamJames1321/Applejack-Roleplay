@@ -11,6 +11,7 @@ local function conditional(ply,pos)
 end
 local function success(ply,_,self)
 	if (not ply:IsValid()) then return end
+	ply:Emote(GM.Config["Weapon Timers"]["Equip Message"]["Final"]:format(self.WeaponType, ply._GenderWord));
 	ply._Equipping					= false;
 	ply._FreshWeapons[self.UniqueID]= true;
 	ply:Give(					self.UniqueID	);
@@ -23,6 +24,7 @@ end
 
 local function failure(ply)
 	if (not ply:IsValid()) then return end
+	ply:Emote(GM.Config["Weapon Timers"]["Equip Message"]["Abort"]:format(ply._GenderWord));
 	ply._Equipping = false;
 end
 
@@ -51,9 +53,10 @@ function ITEM:onUse(ply)
 	end
 	ply._Equipping	= true;
 	local pos = ply:GetPos()
-
+	timer.Simple(GM.Config["Weapon Timers"]["equiptime"][self.WeaponType], function()
 		if (ply:IsValid() and ply:GetPos() == pos) then
 			if (not ply:IsValid()) then return end
+			ply:Emote(GM.Config["Weapon Timers"]["Equip Message"]["Final"]:format(self.WeaponType, ply._GenderWord));
 			ply._Equipping					= false;
 			ply._FreshWeapons[self.UniqueID]= true;
 			ply:Give(					self.UniqueID	);
@@ -63,5 +66,7 @@ function ITEM:onUse(ply)
 				self:OnEquip(ply);
 			end
 		end
+	end)
+	ply:Emote(GM.Config["Weapon Timers"]["Equip Message"]["Start"]:format(ply._GenderWord));
 	return false -- Removing the weapon from your inventory is handled in the timer
 end

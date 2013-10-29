@@ -1,12 +1,12 @@
 include("shared.lua")
 
 SWEP.DrawAmmo			= true
-SWEP.DrawCrosshair		= true
+SWEP.DrawCrosshair		= false
 SWEP.ViewModelFOV		= 80
 SWEP.ViewModelFlip		= true
 SWEP.CSMuzzleFlashes	= true
 SWEP.DrawWeaponInfoBox  = true
-SWEP.CustomCrosshair = true --		= false
+SWEP.CustomCrosshair = false --		= false
 
 --This is the font that's used to draw the death icons
 
@@ -163,6 +163,67 @@ function SWEP:DrawHUD()
 		end
 
 	end
+end
+
+
+-- mostly garry's code
+local IRONSIGHT_TIME = 0.35
+function SWEP:GetViewModelPosition(pos, ang)
+
+	if not self.IronSightsPos then return pos, ang end
+
+	local bIron = self.dt.ironsights
+	if bIron ~= self.bLastIron then -- Are we toggling ironsights?
+
+		self.bLastIron = bIron
+		self.fIronTime = CurTime()
+
+		if bIron then
+			self.SwayScale 	= 0.3
+			self.BobScale 	= 0.1
+		else
+			self.SwayScale 	= 1.0
+			self.BobScale 	= 1.0
+		end
+
+	end
+
+	local fIronTime = self.fIronTime or 0
+
+	if not bIron and (fIronTime < CurTime() - IRONSIGHT_TIME) then
+		return pos, ang
+	end
+
+	local Mul = 1.0 -- we scale the model pos by this value so we can interpolate between ironsight/normal view
+
+	if fIronTime > CurTime() - IRONSIGHT_TIME then
+
+		Mul = math.Clamp((CurTime() - fIronTime) / IRONSIGHT_TIME, 0, 1)
+		if not bIron then Mul = 1 - Mul end
+
+	end
+
+	local Offset	= self.IronSightsPos
+
+	if self.IronSightsAng then
+
+		ang = ang*1
+		ang:RotateAroundAxis(ang:Right(), 		self.IronSightsAng.x * Mul)
+		ang:RotateAroundAxis(ang:Up(), 			self.IronSightsAng.y * Mul)
+		ang:RotateAroundAxis(ang:Forward(), 	self.IronSightsAng.z * Mul)
+
+	end
+
+	local Right 	= ang:Right()
+	local Up 		= ang:Up()
+	local Forward 	= ang:Forward()
+
+	pos = pos + Offset.x * Right * Mul
+	pos = pos + Offset.y * Forward * Mul
+	pos = pos + Offset.z * Up * Mul
+
+	return pos, ang
+
 end
 
 -- This function handles player FOV clientside.  It is used for scope and ironsight zooming.

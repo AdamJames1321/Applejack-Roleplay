@@ -2,7 +2,7 @@
 	~ Base packaging ~
 	~ Applejack ~
 --]]
-
+include("item.lua");
 ITEM.Capacity	= 20
 ITEM.AutoClose	= true
 ITEM.NoVehicles = true;

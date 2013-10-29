@@ -2,7 +2,7 @@
 	~ Base npc ~
 	~ Applejack ~
 --]]
-
+include("item.lua");
 ITEM.NoVehicles = true;
 local pos;
 function ITEM:onUse(ply)

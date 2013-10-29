@@ -27,7 +27,7 @@ function PLUGIN:PostPlayerSpawn(player, lightSpawn, changeTeam)
 		if ((player._Hunger.suicided or player._Hunger.amount == 100)
 		and player._Hunger.lastTeam and player:Team() == player._Hunger.lastTeam) then
 			player._Hunger.amount = 50;
-			player:SetHealth(100);
+			player:SetHealth(50);
 		else
 			player._Hunger.amount = 0;
 		end
@@ -65,7 +65,7 @@ function PLUGIN:PlayerSecond(player)
 	if (not (player._Hunger.amount == 100 and (player:Health() > damage or GM.Config["Hunger Death"] or player:KnockedOut()))) then
 		return
 	end
-	local world = game.GetWorld();
+	local world = game.GetWorldEntity();
 
 	-- Check if the player is knocked out.
 	if (player:KnockedOut() and IsValid(player.ragdoll.entity)) then

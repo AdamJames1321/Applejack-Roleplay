@@ -60,6 +60,11 @@ player.loadFunctions = {
 };
 
 ---
+-- Keys in the player's .cider table that shouldn't be saved in to the SQL database
+player.saveIgnoreKeys = {
+}
+
+---
 -- Keys in the player's .cider table that need a custom function run on them
 player.saveFunctions = {
 	_Inventory = function(ply, data)

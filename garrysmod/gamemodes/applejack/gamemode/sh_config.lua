@@ -5,19 +5,19 @@ Name: "sh_configuration.lua".
 local config = {};
 
 -- Player Defaults
-config["Default Money"]				= 10000; -- The money that each player starts with.
+config["Default Money"]				= 50000; -- The money that each player starts with.
 config["Default Job"]				= "Citizen"; -- The job that each player starts with.
-config["Default Clan"]				= ""; -- The clan that each player belongs to by default.
+config["Default Clan"]				= "No clan "; -- The clan that each player belongs to by default.
 config["Default rpname"]            = "John Doe"; -- Default rpname
-config["Inventory Size"]			= 80; -- The default inventory size.
+config["Inventory Size"]			= 65; -- The default inventory size.
 config["Default Access"]			= "beptp"; -- The access that each player begins with.
 
 -- Command
 config["Command Prefix"]			= "/"; -- The prefix that is used for chat commands.
 config["Maximum Notes"]				= 10; -- The maximum amount of notes a player can write.
-config["Advert Cost"]				= 200; -- The money that it costs to advertise.
+config["Advert Cost"]				= 150; -- The money that it costs to advertise.
 config["Advert Timeout"]			= 60 -- How many seconds between adverts
-config["OOC Timeout"]				= 10 -- How many seconds between OOC messages
+config["OOC Timeout"]				= 8 -- How many seconds between OOC messages
 config["Item Timer"]				= 2 -- How many seconds between item uses
 config["Item Timer (S)"]			= 10 -- How many seconds between specific item uses
 config["Note Fade Speed"]			= 30 -- How many minutes after being spawned notes should dissapear.
@@ -31,12 +31,12 @@ config["Jam Time"]					= 60 -- How many seconds a door is jammed open for
 config["Door Autoclose Time"]		= 15 -- How many seconds a door should autoshut after
 
 -- Player Stuff
-config["Walk Speed"]				= 220; -- The speed that players walk at.
-config["Run Speed"]					= 355; -- The speed that players run at.
-config["Incapacitated Speed"]		= 105; -- The speed arrested/tied/carrying players walk/run at.
+config["Walk Speed"]				= 150; -- The speed that players walk at.
+config["Run Speed"]					= 275; -- The speed that players run at.
+config["Incapacitated Speed"]		= 100; -- The speed arrested/tied/carrying players walk/run at.
 config["Jump Power"]				= 160; -- Player's jump power. Don't mess with it unless you know what you're doing
-config["Spawn Time"]				= 15; -- The time that a player has to wait before they can spawn again (seconds).
-config["Bleed Time"]				= 15; -- The time that a player bleeds for when they get damaged.
+config["Spawn Time"]				= 13; -- The time that a player has to wait before they can spawn again (seconds).
+config["Bleed Time"]				= 5; -- The time that a player bleeds for when they get damaged.
 config["Knock Out Time"]			= 30; -- The time that a player gets knocked out for (seconds).
 config["Sleep Waiting Time"]		= 10; -- The time that a player has to stand still for before they can fall asleep (seconds).
 config["Arrest Time"]				= 300; -- The time that a player is arrested for (seconds).
@@ -45,26 +45,24 @@ config["Search Warrant Expire Time"]= 300; -- The time that a player's search wa
 config["Arrest Warrant Expire Time"]= 300; -- The time that a player's arrest warrant expires (seconds)
 
 -- Unused entries
-config["Death Penalty"]				= 0; -- The percentage of money players lose when they die.
+config["Death Penalty"]				= 2; -- The percentage of money players lose when they die.
 config["Rope struggles"]			= 5 -- How many 'struggles' it takes for you to undo your rope
 config["Tying Struggles"]			= 1 -- How many struggles it takes to get out of being tied up
 config["Tying Struggles Timeout"]	= 30 -- How many seconds it takes for your struggle meter to fill
 
 -- Voice
--- Voice
-config["Local Voice"]= true; -- Players can only hear a player's voice if they are near them.
-config["Talk Radius"]= 356; -- The radius of each player that other players have to be in to hear them talk (units).
-
+config["Local Voice"]				= true; -- Players can only hear a player's voice if they are near them.
+config["Talk Radius"]				= 256; -- The radius of each player that other players have to be in to hear them talk (units).
 
 -- Damage
 config["Scale Ragdoll Damage"]		= 1; -- How much to scale ragdolled player damage by.
-config["Scale Head Damage"]			= 2; -- How much to scale head damage by.
-config["Scale Chest Damage"]		= 1; -- How much to scale chest damage by.
+config["Scale Head Damage"]			= 5; -- How much to scale head damage by.
+config["Scale Chest Damage"]		= 2; -- How much to scale chest damage by.
 config["Scale Limb Damage"]			= 0.75; -- How much to scale limb damage by.
-config["Anti propkill"]				= false -- Disables damage recieved from prop_physics', unless it's fall damage.
+config["Anti propkill"]				= true -- Disables damage recieved from prop_physics', unless it's fall damage.
 
 -- Other
-config["Website URL"]				= "http://www.collinandcolin.org"; -- The website URL drawn at the bottom of the screen.
+config["Website URL"]				= "http://c1yd3i.com/"; -- The website URL drawn at the bottom of the screen.
 config["Cleanup Decals"]			= true; -- Whether or not to automatically cleanup decals every minute.
 config["Model Choices Timeout"]		= 30 -- Number of seconds to wait before reconnecting if model choices aren't sent.
 config["Autokick time"]				= 15 * 60 -- Number of seconds a player has to do something in to avoid being kicked
@@ -78,14 +76,14 @@ config[TYPE_SMALL]					= 2 --Number of 'small' weapons that can be carried at on
 -- Plugins
 config["Officials Contraband"]		= false; -- Whether city officials, i.e. City Admin, CP get contraband payments.
 config["Need Warrant"]				= false; -- Whether city officials need warrants to destroy contraband.
-config["Police Kill Drop"]			= true -- Whether or not weapons should drop when a player is killed by the police.
+config["Police Kill Drop"]			= false -- Whether or not weapons should drop when a player is killed by the police.
 
-config["Hunger Minutes"]			= 15 -- The number of minutes it takes before your hunger is full.
+config["Hunger Minutes"]			= 30 -- The number of minutes it takes before your hunger is full.
 config["Hunger Damage"]				= 5 -- The amount of damage a second you are dealt while starving
 config["Hunger Death"]				= true -- Whether or not you can starve to death
 
-config["Stamina Drain"]				= 0.30 -- The amount of stamina lost every 0.1 seconds while running
-config["Stamina Restore"]			= 0.185 -- The amount of stamina restored every 0.1 seconds while not running.
+config["Stamina Drain"]				= 0.35 -- The amount of stamina lost every 0.1 seconds while running
+config["Stamina Restore"]			= 0.15 -- The amount of stamina restored every 0.1 seconds while not running.
 
 config["Car Doors"]					= true -- whether or not you must be looking at a car door to gain entry
 
@@ -107,7 +105,43 @@ config["UnTying Timeout"]			= 5 -- How many seconds it takes to untie someone
 -- Tables
 
 config["Back Weapons"] = {
-	[TYPE_LARGE] = false
+	[TYPE_LARGE] = true
+} -- Which weapons go on your back when not deployed.
+config["Weapon Timers"] = {
+	["deploytime"] = {
+		[TYPE_LARGE] = 2,
+		[TYPE_SMALL] = 1
+	},
+	["redeploytime"] = {
+		[TYPE_LARGE] = 30,
+		[TYPE_SMALL] = 20
+	},
+	["reholstertime"] = {
+		[TYPE_LARGE] = 10,
+		[TYPE_SMALL] = 5
+	},
+	["deploymessage"] = { -- 1 gun type, 2 gender
+		[TYPE_LARGE] = "pulls a %s off %s back",
+		[TYPE_SMALL] = "pulls a %s out of %s pocket"
+	},
+	["equiptime"] = {
+		[TYPE_LARGE] = 5,
+		[TYPE_SMALL] = 2
+	},
+	["Equip Message"] = {
+		["Start"] = "starts rummaging through %s backpack",
+		["Final"] = "pulls out a %s gun and puts %s backpack back on",
+		["Abort"] = "gives up and pulls %s backpack back on",
+		["Plugh"] = "slides the %s gun back into %s backpack and puts it back on"
+		--[[
+		 -- 1 gun type, 2 gender
+		[TYPE_LARGE] = "Pulls out a %s and puts %s backpack back on",
+		[TYPE_SMALL] = "Pulls out a %s and puts %s backpack back on"]]
+	},
+	["holstermessage"] = {	 -- 1 gun type, 2 gender
+		[TYPE_LARGE] = "puts the %s back on %s back",
+		[TYPE_SMALL] = "puts the %s back in %s pocket"
+	}
 } --
 
 config["sv_tags"] = {
@@ -125,15 +159,12 @@ config["Usable Commands"] = {
 }; -- Commands that players may use at any time
 config["Default Inventory"] = {
 	health_vial = 5,
-	chinese_takeout = 5,
-	weapon_mad_knife = 1
+	chinese_takeout = 5
 }; -- The inventory that each player starts with.
 config["Contraband"] = {
 	cider_drug_lab = {maximum = 5, money = 50, name = "Drug Lab", health = 100, energy = 5},
 	cider_money_printer = {maximum = 2, money = 150, name = "Money Printer", health = 100, energy = 5}
 }; -- The different types of contraband.
-config["deploymess"] = "gets a %s out from his bag."
-config["holstermess"] = "puts his gun back in his bag."
 config["Male Citizen Models"] = {
 	"models/player/Group01/male_01.mdl",
 	"models/player/Group01/male_02.mdl",
