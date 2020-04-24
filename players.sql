@@ -46,7 +46,6 @@ CREATE TABLE IF NOT EXISTS `players` (
 
 INSERT INTO `players` (`_Key`, `_Name`, `_SteamID`, `_UniqueID`, `_Inventory`, `_Blacklist`, `_Misc`, `_Donator`, `_Money`, `_Clan`, `_Access`, `_Arrested`) VALUES
 ('', 'Craig.Collin', 'STEAM_0:0:41687673', '1896910761', 'chinese_takeout: 5; health_vial: 5', '', 'EquippedWeapons', '0', '50200', 'No clan ', '', 'false'),
-('', 'c1yd3i<3', 'STEAM_0:0:49191585', '2289249683', 'chinese_takeout: 5; health_vial: 5', '', 'EquippedWeapons', '0', '52650', 'The Cheap Bunch', '', 'false'),
 ('', '[FL:RP] HeR0x', 'STEAM_0:1:46282055', '3363626079', 'melon: 4; chinese_takeout: 5; cider_fiveseven: 7; ammo_pistol: 4; health_vial: 4', '', 'EquippedWeapons', '0', '7225', 'MNU - F.R.F.B Guard', '', 'false'),
 ('', 'Mysterious', 'STEAM_0:1:41457172', '3167501478', 'chinese_takeout: 5; health_vial: 5', '', 'EquippedWeapons', '0', '50900', 'No clan ', '', 'false'),
 ('', '[DS] Decie_ere', 'STEAM_0:1:62121734', '715611401', 'ammo_pistol: 9; ammo_rifle: 10; cider_glock18: 10; chinese_takeout: 5; health_vial: 5', '', 'EquippedWeapons', '0', '12500', 'No clan ', '', 'false'),
